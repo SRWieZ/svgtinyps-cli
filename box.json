@@ -1,0 +1,10 @@
+{
+  "output": "build/svgtinyps.phar",
+  "banner": false,
+  "blacklist": [
+    "tests"
+  ],
+  "compactors": [
+    "KevinGH\\Box\\Compactor\\Php"
+  ]
+}

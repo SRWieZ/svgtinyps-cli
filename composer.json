@@ -1,0 +1,53 @@
+{
+  "name": "srwiez/svgtinyps-cli",
+  "description": "SVG (Portable and Secure) commandline converter for BIMI compliance",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Eser DENIZ",
+      "email": "srwiez@gmail.com"
+    }
+  ],
+  "bin": [
+    "src/svgtinyps.php"
+  ],
+  "require": {
+    "php": "^8.2",
+    "ext-dom": "*",
+    "srwiez/php-svg-ps-converter": "^1.1"
+  },
+  "require-dev": {
+    "pestphp/pest": "^2.24",
+    "laravel/pint": "^1.13",
+    "humbug/box": "^4.3"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "autoload": {
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "build": [
+      "./build.sh"
+    ],
+    "box": [
+      "./vendor/bin/box"
+    ],
+    "pint": [
+      "./vendor/bin/pint --preset psr12"
+    ],
+    "test": [
+      "./vendor/bin/pest"
+    ]
+  }
+}
