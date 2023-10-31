@@ -26,7 +26,7 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Launch Pint inspection
-        run: vendor/bin/pint
+        run: composer pint
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
