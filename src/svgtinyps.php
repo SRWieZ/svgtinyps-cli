@@ -44,11 +44,11 @@ function getComposerVersion($package = 'composer/composer'): ?string
 // Function to display help information
 function showHelp()
 {
-    $version = '@git-tag@';
+    $version = '@git_tag@';
     echo 'Usage: svgtinyps [options] [command] [input-file] [output-file]'.PHP_EOL;
     echo PHP_EOL;
     echo 'Options:'.PHP_EOL;
-    echo '  -v, --verbose  Enable verbose mode'.PHP_EOL;
+    echo "  -v, --verbose  Enable verbose mode".PHP_EOL;
     echo PHP_EOL;
     echo 'Commands:'.PHP_EOL;
     echo '  convert [input] [output]  - Convert SVG file'.PHP_EOL;
@@ -56,12 +56,12 @@ function showHelp()
     // echo '  minify  [input]           - Minify SVG file'.PHP_EOL;
     echo '  help                      - Show this help information'.PHP_EOL;
     echo PHP_EOL;
-    echo 'Information:'.PHP_EOL;
-    echo $version != '@git-tag@' ? 'Version: '.$version.PHP_EOL : '';
+    echo 'Informations:'.PHP_EOL;
+    echo !str_starts_with($version, '@git_tag') ? '  Version: '.$version.PHP_EOL : '';
     // echo 'PHP sapi name: '.php_sapi_name().PHP_EOL;
-    echo 'Based on https://github.com/srwiez/php-svg-ps-converter version: '.getComposerVersion('srwiez/php-svg-ps-converter').PHP_EOL;
-    echo 'Built with https://github.com/box-project/box'.PHP_EOL;
-    echo php_sapi_name() == 'micro' ? 'Compiled with https://github.com/crazywhalecc/static-php-cli'.PHP_EOL : '';
+    echo '  Based on https://github.com/srwiez/php-svg-ps-converter version: '.getComposerVersion('srwiez/php-svg-ps-converter').PHP_EOL;
+    echo '  Built with https://github.com/box-project/box'.PHP_EOL;
+    echo php_sapi_name() == 'micro' ? '  Compiled with https://github.com/crazywhalecc/static-php-cli'.PHP_EOL : '';
 }
 
 if (! $command || $command === 'help') {

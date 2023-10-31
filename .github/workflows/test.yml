@@ -5,6 +5,8 @@ on: ['push', 'pull_request']
 jobs:
   ci:
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
     strategy:
       matrix:
         os: [ubuntu-latest]
