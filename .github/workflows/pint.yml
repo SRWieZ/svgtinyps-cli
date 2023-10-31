@@ -1,4 +1,4 @@
-name: PHP Linting (Pint)
+name: Linting
 on:
   workflow_dispatch:
   push:

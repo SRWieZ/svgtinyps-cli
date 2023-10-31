@@ -1,4 +1,4 @@
-name: Build .phar for relase
+name: Build
 
 on: push
 
