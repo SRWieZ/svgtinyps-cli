@@ -48,7 +48,7 @@ function showHelp()
     echo 'Usage: svgtinyps [options] [command] [input-file] [output-file]'.PHP_EOL;
     echo PHP_EOL;
     echo 'Options:'.PHP_EOL;
-    echo "  -v, --verbose  Enable verbose mode".PHP_EOL;
+    echo '  -v, --verbose  Enable verbose mode'.PHP_EOL;
     echo PHP_EOL;
     echo 'Commands:'.PHP_EOL;
     echo '  convert [input] [output]  - Convert SVG file'.PHP_EOL;
