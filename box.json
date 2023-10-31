@@ -6,5 +6,6 @@
   ],
   "compactors": [
     "KevinGH\\Box\\Compactor\\Php"
-  ]
+  ],
+  "git-tag": "git_tag"
 }
