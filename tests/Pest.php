@@ -38,3 +38,8 @@
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
+
+function fixPathForTest($path)
+{
+    return realpath(__DIR__.'/../'.$path);
+}
