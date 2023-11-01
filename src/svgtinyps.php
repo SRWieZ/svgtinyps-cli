@@ -2,7 +2,10 @@
 
 use SVGTinyPS\SVGTinyPS;
 
-require __DIR__.'/../vendor/autoload.php';
+if (class_exists('\Composer\InstalledVersions')) {
+    require __DIR__.'/../vendor/autoload.php';
+}
+
 // Argument parsing
 $options = getopt('v', ['verbose']);
 $isVerbose = isset($options['v']) || isset($options['verbose']);
@@ -60,14 +63,14 @@ function showHelp()
     echo php_sapi_name() == 'micro' ? '  Compiled with https://github.com/crazywhalecc/static-php-cli'.PHP_EOL : '';
 }
 
-if (! $command || $command === 'help') {
+if ( ! $command || $command === 'help') {
     showHelp();
     exit;
 }
 
 $inputFile = $argv[1] ?? null;
 
-if (! $inputFile || ! file_exists($inputFile)) {
+if ( ! $inputFile || ! file_exists($inputFile)) {
     echo "Error: Input file not provided or doesn't exist.".PHP_EOL;
     exit(1);
 }
@@ -84,7 +87,7 @@ switch ($command) {
             exit(1);
         }
 
-        if ($outputDir && (! is_dir($outputDir) || ! is_writable($outputDir))) {
+        if ($outputDir && ( ! is_dir($outputDir) || ! is_writable($outputDir))) {
             echo "Error: The output directory either does not exist or is not writeable.\n";
             exit(1);
         }
@@ -96,10 +99,10 @@ switch ($command) {
         verboseLog('Checking for SVG issues', $isVerbose);
         checkIssues($inputFile, $isVerbose);
         break;
-        // case 'minify':
-        //     verboseLog('Starting SVG minification', $isVerbose);
-        //     minifySvg($inputFile, $isVerbose);
-        //     break;
+    // case 'minify':
+    //     verboseLog('Starting SVG minification', $isVerbose);
+    //     minifySvg($inputFile, $isVerbose);
+    //     break;
     default:
         echo 'Invalid command.'.PHP_EOL;
         showHelp();
