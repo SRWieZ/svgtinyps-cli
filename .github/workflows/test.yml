@@ -1,6 +1,10 @@
 name: Tests
 
-on: ['push', 'pull_request']
+on:
+  pull_request: ~
+  push:
+    branches:
+      - main
 
 jobs:
   ci:
@@ -15,6 +19,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ matrix.php }}-composer-${{ matrix.os }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
