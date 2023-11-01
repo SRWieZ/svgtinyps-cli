@@ -10,7 +10,7 @@
     }
   ],
   "bin": [
-    "src/svgtinyps.php"
+    "bin/svgtinyps"
   ],
   "require": {
     "php": "^8.2",

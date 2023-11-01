@@ -1,4 +1,5 @@
 {
+  "main": "src/svgtinyps.php",
   "output": "build/svgtinyps.phar",
   "banner": false,
   "blacklist": [

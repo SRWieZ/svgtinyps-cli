@@ -12,7 +12,9 @@ composer box compile
 #tar -xvf php-8.2.12-micro-macos-x86_64.tar.gz
 #cd ..
 
-#TODO : build with static php having pretty much only ext-dom to reduce size of binary
+#TODO : build static php first to have pretty much only ext-dom and reduce size of binary
+#TODO : Make it CI/CD ready
 
-cat ./tmp/micro.sfx ./build/svgtinyps.phar > ./build/svgtinyps
-chmod 0755 ./build/svgtinyps
+mkdir -p ./build/macos-x86_64
+cat ./tmp/micro.sfx ./build/svgtinyps.phar > ./build/macos-x86_64/svgtinyps
+chmod 0755 ./build/macos-x86_64/svgtinyps

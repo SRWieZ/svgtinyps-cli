@@ -1,9 +1,8 @@
-#!/usr/bin/env php
 <?php
 
 use SVGTinyPS\SVGTinyPS;
 
-require 'vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 // Argument parsing
 $options = getopt('v', ['verbose']);
 $isVerbose = isset($options['v']) || isset($options['verbose']);
@@ -30,13 +29,10 @@ function verboseLog($message, $isVerbose)
 
 function getComposerVersion($package = 'composer/composer'): ?string
 {
-    $composerDataFile = 'vendor/composer/InstalledVersions.php';
-    if (file_exists($composerDataFile)) {
-        require_once $composerDataFile;
-        if (class_exists('\Composer\InstalledVersions')) {
-            return \Composer\InstalledVersions::getPrettyVersion($package) ?? null;
-        }
+    if (class_exists('\Composer\InstalledVersions')) {
+        return \Composer\InstalledVersions::getPrettyVersion($package) ?? null;
     }
+
 
     return null;
 }
