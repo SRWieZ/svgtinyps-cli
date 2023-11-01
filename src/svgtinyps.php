@@ -2,7 +2,7 @@
 
 use SVGTinyPS\SVGTinyPS;
 
-if ( ! class_exists('\Composer\InstalledVersions')) {
+if (! class_exists('\Composer\InstalledVersions')) {
     require __DIR__.'/../vendor/autoload.php';
 }
 
