@@ -1,7 +1,10 @@
 # svgtinyps
 
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/SRWieZ/svgtinyps-cli)
-![GitHub release (latest by SemVer including pre-releases)](https://img.shields.io/github/downloads-pre/SRWieZ/svgtinyps-cli/latest/total)
+![Packagist PHP Version](https://img.shields.io/packagist/dependency-v/SRWieZ/svgtinyps-cli/php)
+![Packagist License (custom server)](https://img.shields.io/packagist/l/SRWieZ/svgtinyps-cli)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/SRWieZ/svgtinyps-cli/test.yml)
+
 
 CLI Tool for SVG Tiny P/S (Portable and Secure) conversion and BIMI compliance.
 
@@ -73,9 +76,9 @@ composer build
 
 ## Roadmap
 Pull requests are welcome! Here are some ideas to get you started:
+- Use Symfony Console for better ui
 - Build binaries for Windows, Linux and MacOS
 - Publish on Homebrew 
-- Use Symfony Console
 - Automate everything with Github Actions
 
 
