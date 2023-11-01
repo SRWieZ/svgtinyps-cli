@@ -20,3 +20,10 @@ test('it output an error if output directory is not provided', function () {
     expect($output)->toContain('Error: Output file not provided for conversion')
         ->and($exitCode)->toBe(1);
 });
+
+test('it output an error if command is not provided or invalid', function () {
+    exec('php src/svgtinyps.php assets/twitter.svg', $output, $exitCode);
+    $output = implode("\n", $output); // Combine array elements into a single string
+    expect($output)->toContain('Invalid command')
+        ->and($exitCode)->toBe(1);
+});

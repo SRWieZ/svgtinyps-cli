@@ -68,34 +68,46 @@ if (! $command || $command === 'help') {
     exit;
 }
 
-$inputFile = $argv[1] ?? null;
-
-if (! $inputFile || ! file_exists($inputFile)) {
-    echo "Error: Input file not provided or doesn't exist.".PHP_EOL;
-    exit(1);
+function checkInputFile($inputFile)
+{
+    if (! $inputFile || ! file_exists($inputFile)) {
+        echo "Error: Input file not provided or doesn't exist.".PHP_EOL;
+        exit(1);
+    }
 }
 
-$outputFile = $argv[2] ?? null;
+function checkOutputFile($outputFile)
+{
+    $outputDir = $outputFile ? dirname($outputFile) : null;
+    if (empty($outputFile)) {
+        echo 'Error: Output file not provided for conversion.'.PHP_EOL;
+        exit(1);
+    }
+
+    if ($outputDir && (! is_dir($outputDir) || ! is_writable($outputDir))) {
+        echo "Error: The output directory either does not exist or is not writeable.\n";
+        exit(1);
+    }
+}
+
 switch ($command) {
     case 'convert':
+        $inputFile = $argv[1] ?? null;
+        $outputFile = $argv[2] ?? null;
 
-        // Checking output directory
-        $outputDir = $outputFile ? dirname($outputFile) : null;
-
-        if (empty($outputFile)) {
-            echo 'Error: Output file not provided for conversion.'.PHP_EOL;
-            exit(1);
-        }
-
-        if ($outputDir && (! is_dir($outputDir) || ! is_writable($outputDir))) {
-            echo "Error: The output directory either does not exist or is not writeable.\n";
-            exit(1);
-        }
+        checkInputFile($inputFile);
+        checkOutputFile($outputFile);
 
         verboseLog('Starting SVG conversion', $isVerbose);
         convertSvg($inputFile, $outputFile, $isVerbose);
         break;
     case 'issues':
+
+        $inputFile = $argv[1] ?? null;
+        $outputFile = $argv[2] ?? null;
+
+        checkInputFile($inputFile);
+
         verboseLog('Checking for SVG issues', $isVerbose);
         checkIssues($inputFile, $isVerbose);
         break;
@@ -104,8 +116,10 @@ switch ($command) {
         //     minifySvg($inputFile, $isVerbose);
         //     break;
     default:
-        echo 'Invalid command.'.PHP_EOL;
+        echo 'Invalid command!'.PHP_EOL;
+        echo PHP_EOL;
         showHelp();
+        exit(1);
         break;
 }
 

@@ -15,7 +15,8 @@
   "require": {
     "php": "^8.2",
     "ext-dom": "*",
-    "srwiez/php-svg-ps-converter": "^1.1"
+    "srwiez/php-svg-ps-converter": "^1.1",
+    "composer-runtime-api": "^2.2"
   },
   "require-dev": {
     "pestphp/pest": "^2.24",
