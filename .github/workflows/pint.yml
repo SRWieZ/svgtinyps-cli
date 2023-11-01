@@ -5,7 +5,7 @@ on:
     branches-ignore:
       - 'dependabot/npm_and_yarn/*'
 jobs:
-  Pint:
+  pint:
     runs-on: ubuntu-latest
     permissions:
       contents: write
