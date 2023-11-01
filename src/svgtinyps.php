@@ -58,7 +58,7 @@ function showHelp()
     echo 'Informations:'.PHP_EOL;
     echo ! str_starts_with($version, '@git_tag') ? '  Version: '.$version.PHP_EOL : '';
     // echo 'PHP sapi name: '.php_sapi_name().PHP_EOL;
-    echo '  Based on https://github.com/srwiez/php-svg-ps-converter version: '.getComposerVersion('srwiez/php-svg-ps-converter').PHP_EOL;
+    echo '  Based on https://github.com/srwiez/php-svg-ps-converter ('.getComposerVersion('srwiez/php-svg-ps-converter').')'.PHP_EOL;
     echo '  Built with https://github.com/box-project/box'.PHP_EOL;
     echo php_sapi_name() == 'micro' ? '  Compiled with https://github.com/crazywhalecc/static-php-cli'.PHP_EOL : '';
 }

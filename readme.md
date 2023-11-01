@@ -76,6 +76,7 @@ composer build
 
 ## Roadmap
 Pull requests are welcome! Here are some ideas to get you started:
+- Option to set <title>
 - Use Symfony Console for better ui
 - Build binaries for Windows, Linux and MacOS
 - Publish on Homebrew 
