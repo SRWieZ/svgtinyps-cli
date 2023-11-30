@@ -67,13 +67,20 @@ This project use [Pest](https://pestphp.com/) for testing.
 composer test
 ```
 
-## Building
+## Build from sources
 This project use [box](https://github.com/box-project/box), [php-static-cli](https://github.com/crazywhalecc/static-php-cli) and [php-micro](https://github.com/dixyes/phpmicro).
-A build script has been created to build the project.
+A build script has been created to build the project. (tested only on macOS x86_64)
 ```bash
 composer build
 ```
 
+You can also build it from Github Workflow, or locally using [act](https://github.com/nektos/act)
+```bash
+#upcomming soon
+act manual -j build-macos-binary -P macos-latest=-self-hosted
+act manual -j build-linux-binary
+act manual -j build-windows-binary
+```
 ## Roadmap
 Pull requests are welcome! Here are some ideas to get you started:
 - Option to set <title>

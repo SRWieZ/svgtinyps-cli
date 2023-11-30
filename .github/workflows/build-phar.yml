@@ -4,7 +4,7 @@ on:
     types: [ created ]
 
 jobs:
-  build:
+  build-phar:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     permissions:
@@ -22,6 +22,12 @@ jobs:
         with:
           php-version: '8.2'
           tools: composer:v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-8.2-composer-ubuntu-latest
 
       - name: Install Dependencies
         run: composer install

@@ -1,6 +1,6 @@
 {
   "main": "src/svgtinyps.php",
-  "output": "build/svgtinyps.phar",
+  "output": "build/bin/svgtinyps.phar",
   "banner": false,
   "blacklist": [
     "tests"

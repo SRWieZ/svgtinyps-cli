@@ -19,6 +19,12 @@ jobs:
           php-version: '8.2'
           tools: composer:v2
 
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-8.2-composer-ubuntu-latest
+
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
