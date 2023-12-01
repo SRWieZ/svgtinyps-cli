@@ -5,7 +5,6 @@ on:
     types: [ created ]
 
   workflow_dispatch:
-  manual:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

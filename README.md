@@ -76,10 +76,11 @@ composer build
 
 You can also build it from Github Workflow, or locally using [act](https://github.com/nektos/act)
 ```bash
+act -j build-macos-binary -P macos-latest=-self-hosted
+
 #upcomming soon
-act manual -j build-macos-binary -P macos-latest=-self-hosted
-act manual -j build-linux-binary
-act manual -j build-windows-binary
+act -j build-linux-binary
+act -j build-windows-binary
 ```
 ## Roadmap
 Pull requests are welcome! Here are some ideas to get you started:
