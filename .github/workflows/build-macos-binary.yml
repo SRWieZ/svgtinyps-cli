@@ -18,7 +18,6 @@ jobs:
     permissions:
       contents: write
 
-    name: build ${{ env.COMPILED_NAME }} with ${{ env.COMPILE_PHP_VERSION }} on macOS x86_64
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
