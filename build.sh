@@ -1,3 +1,17 @@
+#!/bin/bash
+
+# Initialize default binary name
+binary_name="svgtinyps"
+
+# Parse command line arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --name) binary_name="$2"; shift ;; # Get the new binary name
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
 # Removing old build files
 rm -rf build/bin/
 #rm -rf build/buildroot/
@@ -35,9 +49,9 @@ cd ../
 ./static-php-cli/bin/spc build dom,phar --build-micro
 
 # Build binary
-./static-php-cli/bin/spc micro:combine bin/svgtinyps.phar --output=bin/svgtinyps
-chmod 0755 bin/svgtinyps
+./static-php-cli/bin/spc micro:combine bin/svgtinyps.phar --output="bin/$binary_name"
+chmod 0755 "bin/$binary_name"
 
 # Check if it's working !
 cd ../
-./build/bin/svgtinyps help
+./build/bin/"$binary_name" help

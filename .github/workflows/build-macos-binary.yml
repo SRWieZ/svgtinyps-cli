@@ -8,7 +8,7 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  COMPILED_NAME: 'svgtinyps'
+  BINARY_NAME: 'svgtinyps-macos-x86_64'
   COMPILE_PHP_VERSION: '8.2'
   COMPILE_EXTENSIONS: 'phar,dom'
 
@@ -60,18 +60,17 @@ jobs:
 #        run: ./bin/spc build $COMPILE_EXTENSIONS --build-micro
 
       - name: Build Binary
-        run: composer build
+        run: ./build --name "${{ env.BINARY_NAME }}"
 
       - if: ${{ github.event_name == 'workflow_dispatch' }}
         name: Upload binaries
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.COMPILED_NAME }}-macos-x86_64
-          path: build/bin/${{ env.COMPILED_NAME }}
+          name: ${{ env.BINARY_NAME }}
+          path: build/bin/${{ env.BINARY_NAME }}
 
-      # TODO : change the name of the file with build.sh
       - if: ${{ github.event_name != 'workflow_dispatch' }}
         name: Upload binaries to release
         uses: softprops/action-gh-release@v1
         with:
-          files: build/bin/${{ env.COMPILED_NAME }}-macos-x86_64
+          files: build/bin/${{ env.BINARY_NAME }}
