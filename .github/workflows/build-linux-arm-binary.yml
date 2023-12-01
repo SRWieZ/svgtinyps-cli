@@ -1,0 +1,63 @@
+name: Build binary for linux aarch64
+
+on:
+  release:
+    types: [ created ]
+
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  BINARY_NAME: 'svgtinyps-linux-aarch64'
+  COMPILE_PHP_VERSION: '8.2'
+  COMPILE_EXTENSIONS: 'phar,dom'
+
+jobs:
+  build-linux-arm-binary:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.COMPILE_PHP_VERSION }}
+          tools: composer:v2
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ env.COMPILE_PHP_VERSION }}-composer-ubuntu-latest-arm
+
+      - name: Cache build dependencies
+        uses: actions/cache@v3
+        with:
+          path: build/
+          key: build-deps-php-${{ env.COMPILE_PHP_VERSION }}-ubuntu-latest-arm
+
+      - name: Composer install
+        run: composer install --dev
+
+      - name: Build Binary
+        run: ./build-ci-linux-arm.sh --name "${{ env.BINARY_NAME }}"
+
+      - if: ${{ github.event_name == 'workflow_dispatch' }}
+        name: Upload binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.BINARY_NAME }}
+          path: build/bin/${{ env.BINARY_NAME }}
+
+      - if: ${{ github.event_name != 'workflow_dispatch' }}
+        name: Upload binaries to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/bin/${{ env.BINARY_NAME }}
