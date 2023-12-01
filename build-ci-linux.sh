@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Initialize default binary name
+binary_name="svgtinyps"
+
+# Parse command line arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --name) binary_name="$2"; shift ;; # Get the new binary name
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+# Removing old build files
+rm -rf build/bin/
+#rm -rf build/buildroot/
+#rm -rf build/downloads/
+#rm -rf build/source/
+#rm -rf build/static-php-cli/
+
+# Directories
+mkdir -p build/bin/
+
+# Build phar file using box and bos.json
+composer box compile
+
+# Fetch or update static-php-cli
+if [ -d "build/static-php-cli" ]; then
+  cd build/static-php-cli/
+#  git reset --hard HEAD
+  git pull
+else
+  cd build/
+  git clone https://github.com/crazywhalecc/static-php-cli.git
+  cd static-php-cli/
+fi
+
+# Install dependencies
+composer update --no-interaction
+chmod +x bin/spc-alpine-docker
+
+# Build PHP Micro with only the extensions we need
+CACHE_API_EXEC=yes ./bin/spc-alpine-docker download --with-php=8.2 --for-extensions=dom,phar
+./bin/spc-alpine-docker build dom,phar --build-micro
+
+# Build binary
+cat app/buildroot/bin/micro.sfx ../bin/svgtinyps.phar > "../bin/$binary_name"
+chmod 0755 "../bin/$binary_name"
+
+# Check if it's working !
+cd ../../
+./build/bin/"$binary_name" help
