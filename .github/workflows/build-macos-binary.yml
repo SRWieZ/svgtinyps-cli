@@ -43,7 +43,7 @@ jobs:
           key: build-deps-php-${{ env.COMPILE_PHP_VERSION }}-macos-latest
 
       - name: Composer install
-        run: composer install --dev
+        run: composer install --no-progress --optimize-autoloader
 
 #      - id: cache-download
 #        name: Cached source download
