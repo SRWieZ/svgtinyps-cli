@@ -44,7 +44,7 @@ jobs:
           key: build-deps-php-${{ env.COMPILE_PHP_VERSION }}-ubuntu-latest-arm
 
       - name: Composer install
-        run: composer install --dev
+        run: composer install --no-progress --optimize-autoloader
 
       - name: Build Binary
         run: ./build-ci-linux-arm.sh --name "${{ env.BINARY_NAME }}"
