@@ -51,6 +51,3 @@ SPC_USE_ARCH=aarch64 ./bin/spc-alpine-docker build dom,phar --build-micro
 cat buildroot/bin/micro.sfx ../bin/svgtinyps.phar > "../bin/$binary_name"
 chmod 0755 "../bin/$binary_name"
 
-## Check if it's working !
-#cd ../../
-#./build/bin/"$binary_name" help

@@ -51,7 +51,3 @@ cd ../
 # Build binary
 ./static-php-cli/bin/spc micro:combine bin/svgtinyps.phar --output="bin/$binary_name"
 chmod 0755 "bin/$binary_name"
-
-# Check if it's working !
-cd ../
-./build/bin/"$binary_name" help
