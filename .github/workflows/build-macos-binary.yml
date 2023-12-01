@@ -1,0 +1,73 @@
+name: Build binary for macOS x86_64
+# Reprendre build.sh en github action
+on:
+  release:
+    types: [ created ]
+
+  workflow_dispatch:
+  manual:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  COMPILED_NAME: 'svgtinyps'
+  COMPILE_PHP_VERSION: '8.2'
+  COMPILE_EXTENSIONS: 'phar,dom'
+
+jobs:
+  build-macos-binary:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+
+    name: build ${{ env.COMPILED_NAME }} with ${{ env.COMPILE_PHP_VERSION }} on macOS x86_64
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Install macOS missing packages and mark os suffix
+        run: |
+          brew install automake gzip
+          echo "SPC_BUILD_OS=macos" >> $GITHUB_ENV
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ env.COMPILE_PHP_VERSION }}-composer-macos-latest
+
+      - name: Composer install
+        run: composer install --dev
+
+#      - id: cache-download
+#        name: Cached source download
+#        uses: actions/cache@v3
+#        with:
+#          path: downloads
+#          key: php-${{ env.COMPILE_PHP_VERSION }}-dependencies
+#
+#      - if: steps.cache-download.outputs.cache-hit != 'true'
+#        name: Fetch php and extensions sources
+#        run: ./bin/spc download --with-php=${{ env.COMPILE_PHP_VERSION }} --for-extensions=$COMPILE_EXTENSIONS
+#
+#      - name: Build Micro
+#        run: ./bin/spc build $COMPILE_EXTENSIONS --build-micro
+
+      - name: Build Binary
+        run: composer build
+
+      - if: ${{ github.event_name == 'workflow_dispatch' }}
+        name: Upload binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.COMPILED_NAME }}-macos-x86_64
+          path: build/bin/${{ env.COMPILED_NAME }}
+
+      # TODO : change the name of the file with build.sh
+      - if: ${{ github.event_name != 'workflow_dispatch' }}
+        name: Upload binaries to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/bin/${{ env.COMPILED_NAME }}

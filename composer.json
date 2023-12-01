@@ -39,6 +39,7 @@
   },
   "scripts": {
     "build": [
+      "Composer\\Config::disableProcessTimeout",
       "./build.sh"
     ],
     "box": [

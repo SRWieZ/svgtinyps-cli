@@ -30,7 +30,7 @@ jobs:
           key: dependencies-php-8.2-composer-ubuntu-latest
 
       - name: Install Dependencies
-        run: composer install
+        run: composer install --dev
 
       - name: Generate PHAR file
         run: composer box compile
