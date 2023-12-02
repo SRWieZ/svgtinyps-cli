@@ -38,4 +38,4 @@ jobs:
       - name: Upload phar to release
         uses: softprops/action-gh-release@v1
         with:
-          files: build/svgtinyps.phar
+          files: build/bin/svgtinyps.phar
