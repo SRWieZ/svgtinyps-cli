@@ -27,14 +27,19 @@ jobs:
           tools: composer:v2
           coverage: xdebug
 
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.composer/cache/files
-          key: dependencies-php-${{ matrix.php }}-composer-${{ matrix.os }}
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
 
       - name: Install Dependencies
-        run: composer install --dev --no-interaction --prefer-dist --optimize-autoloader
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Run tests
         run: ./vendor/bin/pest
