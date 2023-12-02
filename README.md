@@ -11,7 +11,7 @@ CLI Tool for SVG Tiny P/S (Portable and Secure) conversion and BIMI compliance.
 [Read more from bimi group](https://bimigroup.org/creating-bimi-svg-logo-files/)
 and [the RFC](https://datatracker.ietf.org/doc/id/draft-svg-tiny-ps-abrotman-00.txt)
 
-🧪 If you just want to convert your SVG in a nice ui, you can use the
+🧪 If you just want to convert your SVG in a nice UI, you can use the
 [online version of the converter!](https://checkbimi.com/convertsvg)
 
 You can also checkout the [PHP package](https://github.com/SRWieZ/php-svg-ps-converter) that this project is based on.
@@ -24,6 +24,11 @@ Via [Composer](https://getcomposer.org/) global install command
 ```bash
 composer global install srwiez/svgtinyps-cli
 ```
+
+By [downloading binaries](https://github.com/SRWieZ/svgtinyps-cli/releases/latest) on the latest release, currently only these binaries are compiled on the CI:
+- macOS x86_64
+- linux x86_64
+- linux arm
 
 [//]: # (Coming soon to [Homebrew]&#40;https://brew.sh/&#41;)
 
@@ -39,26 +44,20 @@ composer global install srwiez/svgtinyps-cli
 
 ## Usage
 
-Convert an SVG file to SVG (P/S)
-
-```bash
-svgtinyps convert input.svg output.svg
-```
-
 Identify issues in an SVG file
-
 ```bash
 svgtinyps issues input.svg
 ```
 
-[//]: # (Minify an SVG file)
+Convert an SVG file to SVG (P/S)
+```bash
+svgtinyps convert input.svg output.svg
+```
 
-[//]: # ()
-[//]: # (```bash)
-
-[//]: # (svgtinyps minify input.svg)
-
-[//]: # (```)
+If in the identified issues, you missing th title tag, you can set its value with the `--title` option
+```bash
+svgtinyps convert input.svg output.svg --title="My awesome company"
+```
 
 
 ## Testing
@@ -74,14 +73,17 @@ A build script has been created to build the project. (tested only on macOS x86_
 composer build
 ```
 
-You can also build it from Github Workflow, or locally using [act](https://github.com/nektos/act)
-```bash
-act -j build-macos-binary -P macos-latest=-self-hosted
+[//]: # (You can also build it from Github Workflow, or locally on MacOS using [act]&#40;https://github.com/nektos/act&#41;)
 
-#upcomming soon
-act -j build-linux-binary
-act -j build-windows-binary
-```
+[//]: # (```bash)
+
+[//]: # (act -j build-macos-binary -P macos-latest=-self-hosted)
+
+[//]: # (act -j build-linux-binary)
+
+[//]: # (act -j build-linux-arm-binary)
+
+[//]: # (```)
 ## Roadmap
 Pull requests are welcome! Here are some ideas to get you started:
 - Option to set <title>

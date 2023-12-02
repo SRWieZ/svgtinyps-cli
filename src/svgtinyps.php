@@ -7,20 +7,22 @@ if (!class_exists('\Composer\InstalledVersions')) {
 }
 
 // Argument parsing
-$options = getopt('v', ['verbose']);
-$isVerbose = isset($options['v']) || isset($options['verbose']);
-
 $argv = array_slice($argv, 1); // Remove script name
+$options['is_verbose'] = false;
+$options['title'] = null;
 
-// Remove any verbose options to leave just the command and file arguments
-foreach (['-v', '--verbose'] as $verboseOption) {
-    if (($key = array_search($verboseOption, $argv)) !== false) {
+foreach ($argv as $key => $arg) {
+    if (str_starts_with($arg, '--title=')) {
+        $options['title'] = substr($arg, strlen('--title='));
+        unset($argv[$key]);
+    } elseif (in_array($arg, ['-v', '--verbose'])) {
+        $options['is_verbose'] = true;
         unset($argv[$key]);
     }
 }
 
-$argv = array_values($argv); // Re-index array
-
+// Re-index array after removing options
+$argv = array_values($argv);
 $command = $argv[0] ?? null;
 
 function verboseLog($message, $isVerbose)
@@ -47,6 +49,7 @@ function showHelp()
     echo PHP_EOL;
     echo 'Options:'.PHP_EOL;
     echo '  -v, --verbose  Enable verbose mode'.PHP_EOL;
+    echo '      --title=   Set company name (<title> tag)'.PHP_EOL;
     echo PHP_EOL;
     echo 'Commands:'.PHP_EOL;
     echo '  convert [input] [output]  - Convert SVG file'.PHP_EOL;
@@ -98,8 +101,8 @@ switch ($command) {
         checkInputFile($inputFile);
         checkOutputFile($outputFile);
 
-        verboseLog('Starting SVG conversion', $isVerbose);
-        convertSvg($inputFile, $outputFile, $isVerbose);
+        verboseLog('Starting SVG conversion', $options['is_verbose']);
+        convertSvg($inputFile, $outputFile, $options['title'], $options['is_verbose']); // Pass title to convertSvg
         break;
     case 'issues':
 
@@ -108,8 +111,8 @@ switch ($command) {
 
         checkInputFile($inputFile);
 
-        verboseLog('Checking for SVG issues', $isVerbose);
-        checkIssues($inputFile, $isVerbose);
+        verboseLog('Checking for SVG issues', $options['is_verbose']);
+        checkIssues($inputFile, $options['is_verbose']);
         break;
         // case 'minify':
         //     verboseLog('Starting SVG minification', $isVerbose);
@@ -120,14 +123,17 @@ switch ($command) {
         echo PHP_EOL;
         showHelp();
         exit(1);
-        break;
 }
 
-function convertSvg($input, $output, $isVerbose)
+function convertSvg($input, $output, $title, $isVerbose)
 {
     verboseLog("Converting $input to $output", $isVerbose);
 
     $svgps = new SVGTinyPS(file_get_contents($input));
+
+    if ($title) {
+        $svgps->setTitle($title);
+    }
     $new_svg = $svgps->convert();
     file_put_contents($output, $new_svg);
 }
