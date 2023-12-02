@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bumped https://github.com/SRWieZ/php-svg-ps-converter to 1.1.1
 - Compiled binaries 
 - New `--title` option
+- Better error handling
 
 ## [1.0.5] - 2023-11-01
 More robust autoload
