@@ -60,7 +60,7 @@ jobs:
 #        run: ./bin/spc build $COMPILE_EXTENSIONS --build-micro
 
       - name: Build Binary
-        run: ./build --name "${{ env.BINARY_NAME }}"
+        run: ./build.sh --name "${{ env.BINARY_NAME }}"
 
       - if: ${{ github.event_name == 'workflow_dispatch' }}
         name: Upload binaries
