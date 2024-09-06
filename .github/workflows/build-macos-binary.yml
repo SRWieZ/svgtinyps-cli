@@ -30,6 +30,12 @@ jobs:
           brew install automake gzip
           echo "SPC_BUILD_OS=macos" >> $GITHUB_ENV
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.COMPILE_PHP_VERSION }}
+          tools: composer:v2
+
       - name: Cache build dependencies
         uses: actions/cache@v3
         with:
