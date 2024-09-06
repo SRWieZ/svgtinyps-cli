@@ -1,4 +1,4 @@
-name: Build binary for macOS x86_64
+name: Build binary for macOS arm64
 
 on:
   release:
@@ -8,13 +8,13 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  BINARY_NAME: 'svgtinyps-macos-x86_64'
+  BINARY_NAME: 'svgtinyps-macos-arm64'
   COMPILE_PHP_VERSION: "8.3"
   COMPILE_EXTENSIONS: 'phar,dom'
 
 jobs:
   build-macos-binary:
-    runs-on: macos-14-large
+    runs-on: macos-14
     permissions:
       contents: write
 
