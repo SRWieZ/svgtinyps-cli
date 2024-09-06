@@ -32,7 +32,7 @@ if [ -d "build/static-php-cli" ]; then
   git pull
 else
   cd build/
-  git clone https://github.com/crazywhalecc/static-php-cli.git
+  git clone --depth 1 https://github.com/crazywhalecc/static-php-cli.git
   cd static-php-cli/
 fi
 
@@ -41,8 +41,9 @@ composer update --no-interaction
 chmod +x bin/spc-alpine-docker
 
 # Build PHP Micro with only the extensions we need
-CACHE_API_EXEC=yes ./bin/spc-alpine-docker download --with-php=8.2 --for-extensions=dom,phar
-./bin/spc-alpine-docker build dom,phar --build-micro
+CACHE_API_EXEC=yes ./bin/spc-alpine-docker download --with-php="8.3" --for-extensions="dom,phar,zlib" --prefer-pre-built
+./bin/spc-alpine-docker switch-php-version "8.3"
+./bin/spc-alpine-docker build --build-micro "dom,phar,zlib"
 
 # Build binary
 cat buildroot/bin/micro.sfx ../bin/svgtinyps.phar > "../bin/$binary_name"

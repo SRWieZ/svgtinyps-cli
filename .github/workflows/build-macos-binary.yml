@@ -9,7 +9,7 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   BINARY_NAME: 'svgtinyps-macos-x86_64'
-  COMPILE_PHP_VERSION: '8.2'
+  COMPILE_PHP_VERSION: "8.3"
   COMPILE_EXTENSIONS: 'phar,dom'
 
 jobs:

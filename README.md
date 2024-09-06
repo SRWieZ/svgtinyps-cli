@@ -66,12 +66,21 @@ This project use [Pest](https://pestphp.com/) for testing.
 composer test
 ```
 
+## Contribute
+This project follows PSR coding style. You can use `composer pint` to apply.
+
+All tests are executed with pest. Use `composer pest`
+
+It's recommended to execute `composer qa` before commiting (alias for executing Pint and Pest)
+
 ## Build from sources
 This project use [box](https://github.com/box-project/box), [php-static-cli](https://github.com/crazywhalecc/static-php-cli) and [php-micro](https://github.com/dixyes/phpmicro).
 A build script has been created to build the project. (tested only on macOS x86_64)
+
 ```bash
 composer build
 ```
+Then you can build the binary that you can retrieve in `build/bin/`
 
 [//]: # (You can also build it from Github Workflow, or locally on MacOS using [act]&#40;https://github.com/nektos/act&#41;)
 
@@ -86,12 +95,9 @@ composer build
 [//]: # (```)
 ## Roadmap
 Pull requests are welcome! Here are some ideas to get you started:
-- Option to set <title>
 - Use Symfony Console for better ui
-- Build binaries for Windows, Linux and MacOS
+- Build binaries for MacOS arm64 and Windows
 - Publish on Homebrew 
-- Automate everything with Github Actions
-
 
 ## Credits
 

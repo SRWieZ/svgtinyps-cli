@@ -1,7 +1,6 @@
 {
   "name": "srwiez/svgtinyps-cli",
   "description": "SVG (Portable and Secure) commandline converter for BIMI compliance",
-  "type": "library",
   "license": "MIT",
   "authors": [
     {
@@ -41,6 +40,10 @@
     "build": [
       "Composer\\Config::disableProcessTimeout",
       "./build.sh"
+    ],
+    "qa": [
+      "@composer pint",
+      "@composer test"
     ],
     "box": [
       "./vendor/bin/box"

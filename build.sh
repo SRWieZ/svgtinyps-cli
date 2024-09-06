@@ -32,7 +32,7 @@ if [ -d "build/static-php-cli" ]; then
   git pull
 else
   cd build/
-  git clone https://github.com/crazywhalecc/static-php-cli.git
+  git clone --depth 1 https://github.com/crazywhalecc/static-php-cli.git
   cd static-php-cli/
 fi
 
@@ -45,8 +45,9 @@ cd ../
 
 # Build PHP Micro with only the extensions we need
 ./static-php-cli/bin/spc doctor
-./static-php-cli/bin/spc download --with-php=8.2 --for-extensions=dom,phar
-./static-php-cli/bin/spc build dom,phar --build-micro
+./static-php-cli/bin/spc download --with-php="8.3" --for-extensions="dom,phar,zlib" --prefer-pre-built
+./static-php-cli/bin/spc switch-php-version "8.3"
+./static-php-cli/bin/spc build --build-micro "dom,phar,zlib"
 
 # Build binary
 ./static-php-cli/bin/spc micro:combine bin/svgtinyps.phar --output="bin/$binary_name"

@@ -6,7 +6,7 @@ use Composer\InstalledVersions;
 use SVGTinyPS\SVGTinyPS;
 
 if (!class_exists('\Composer\InstalledVersions')) {
-    require __DIR__ . '/../vendor/autoload.php';
+    require __DIR__.'/../vendor/autoload.php';
 }
 
 // Argument parsing
@@ -31,7 +31,7 @@ $command = $argv[0] ?? null;
 function verboseLog($message, $isVerbose): void
 {
     if ($isVerbose) {
-        echo "[VERBOSE] $message" . PHP_EOL;
+        echo "[VERBOSE] $message".PHP_EOL;
     }
 }
 
@@ -48,25 +48,25 @@ function getComposerVersion($package = 'composer/composer'): ?string
 function showHelp(): void
 {
     $version = '@git_tag@';
-    echo 'Usage: svgtinyps [options] [command] [input-file] [output-file]' . PHP_EOL;
+    echo 'Usage: svgtinyps [options] [command] [input-file] [output-file]'.PHP_EOL;
     echo PHP_EOL;
-    echo 'Options:' . PHP_EOL;
-    echo '  -v, --verbose  Enable verbose mode' . PHP_EOL;
-    echo '      --title=   Set company name (<title> tag)' . PHP_EOL;
+    echo 'Options:'.PHP_EOL;
+    echo '  -v, --verbose  Enable verbose mode'.PHP_EOL;
+    echo '      --title=   Set company name (<title> tag)'.PHP_EOL;
     echo PHP_EOL;
-    echo 'Commands:' . PHP_EOL;
-    echo '  convert [input] [output]  - Convert SVG file' . PHP_EOL;
-    echo '  issues  [input]           - Check for issues in SVG file' . PHP_EOL;
+    echo 'Commands:'.PHP_EOL;
+    echo '  convert [input] [output]  - Convert SVG file'.PHP_EOL;
+    echo '  issues  [input]           - Check for issues in SVG file'.PHP_EOL;
     // echo '  minify  [input]           - Minify SVG file'.PHP_EOL;
-    echo '  help                      - Show this help information' . PHP_EOL;
+    echo '  help                      - Show this help information'.PHP_EOL;
     echo PHP_EOL;
-    echo 'Informations:' . PHP_EOL;
-    echo !str_starts_with($version, '@git_tag') ? '  Version: ' . $version . PHP_EOL : '';
-    echo '  PHP version: ' . phpversion() . PHP_EOL;
+    echo 'Informations:'.PHP_EOL;
+    echo !str_starts_with($version, '@git_tag') ? '  Version: '.$version.PHP_EOL : '';
+    echo '  PHP version: '.phpversion().PHP_EOL;
     // echo 'PHP sapi name: '.php_sapi_name().PHP_EOL;
-    echo '  Based on https://github.com/srwiez/php-svg-ps-converter (' . getComposerVersion('srwiez/php-svg-ps-converter') . ')' . PHP_EOL;
-    echo '  Built with https://github.com/box-project/box' . PHP_EOL;
-    echo php_sapi_name() == 'micro' ? '  Compiled with https://github.com/crazywhalecc/static-php-cli' . PHP_EOL : '';
+    echo '  Based on https://github.com/srwiez/php-svg-ps-converter ('.getComposerVersion('srwiez/php-svg-ps-converter').')'.PHP_EOL;
+    echo '  Built with https://github.com/box-project/box'.PHP_EOL;
+    echo php_sapi_name() == 'micro' ? '  Compiled with https://github.com/crazywhalecc/static-php-cli'.PHP_EOL : '';
 }
 
 if (!$command || $command === 'help') {
@@ -77,7 +77,7 @@ if (!$command || $command === 'help') {
 function checkInputFile($inputFile): void
 {
     if (!$inputFile || !file_exists($inputFile)) {
-        echo "Error: Input file not provided or doesn't exist." . PHP_EOL;
+        echo "Error: Input file not provided or doesn't exist.".PHP_EOL;
         exit(1);
     }
 }
@@ -86,7 +86,7 @@ function checkOutputFile($outputFile): void
 {
     $outputDir = $outputFile ? dirname($outputFile) : null;
     if (empty($outputFile)) {
-        echo 'Error: Output file not provided for conversion.' . PHP_EOL;
+        echo 'Error: Output file not provided for conversion.'.PHP_EOL;
         exit(1);
     }
 
@@ -122,7 +122,7 @@ switch ($command) {
         //     minifySvg($inputFile, $isVerbose);
         //     break;
     default:
-        echo 'Invalid command!' . PHP_EOL;
+        echo 'Invalid command!'.PHP_EOL;
         echo PHP_EOL;
         showHelp();
         exit(1);
@@ -140,7 +140,7 @@ function convertSvg($input, $output, $title, $isVerbose): void
         }
         $new_svg = $svgps->convert();
     } catch (Exception $exception) {
-        echo "Error: " . $exception->getMessage() . PHP_EOL;
+        echo 'Error: '.$exception->getMessage().PHP_EOL;
         exit(1);
     }
     file_put_contents($output, $new_svg);
@@ -154,10 +154,10 @@ function checkIssues($input, $isVerbose): void
         $svgps = new SVGTinyPS(file_get_contents($input));
         $issues = $svgps->identifyIssues();
         foreach ($issues as $issue) {
-            echo "$issue" . PHP_EOL;
+            echo "$issue".PHP_EOL;
         }
     } catch (Exception $exception) {
-        echo "Error: " . $exception->getMessage() . PHP_EOL;
+        echo 'Error: '.$exception->getMessage().PHP_EOL;
         exit(1);
     }
 }
