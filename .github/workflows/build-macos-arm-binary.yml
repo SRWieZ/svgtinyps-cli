@@ -40,7 +40,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: build/
-          key: build-deps-php-${{ env.COMPILE_PHP_VERSION }}-${{ runner.os }}
+          key: build-deps-php${{ env.COMPILE_PHP_VERSION }}-${{ runner.os }}-${{ runner.arch }}
 
       - name: Get composer cache directory
         id: composer-cache
@@ -56,32 +56,18 @@ jobs:
       - name: Composer install
         run: composer install --prefer-dist --no-progress --optimize-autoloader
 
-#      - id: cache-download
-#        name: Cached source download
-#        uses: actions/cache@v3
-#        with:
-#          path: downloads
-#          key: php-${{ env.COMPILE_PHP_VERSION }}-dependencies
-#
-#      - if: steps.cache-download.outputs.cache-hit != 'true'
-#        name: Fetch php and extensions sources
-#        run: ./bin/spc download --with-php=${{ env.COMPILE_PHP_VERSION }} --for-extensions=$COMPILE_EXTENSIONS
-#
-#      - name: Build Micro
-#        run: ./bin/spc build $COMPILE_EXTENSIONS --build-micro
-
       - name: Build Binary
         run: ./build.sh --name "${{ env.BINARY_NAME }}"
 
       - if: ${{ github.event_name == 'workflow_dispatch' }}
         name: Upload binaries
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.BINARY_NAME }}
           path: build/bin/${{ env.BINARY_NAME }}
 
       - if: ${{ github.event_name != 'workflow_dispatch' }}
         name: Upload binaries to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: build/bin/${{ env.BINARY_NAME }}

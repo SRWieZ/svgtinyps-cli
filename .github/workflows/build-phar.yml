@@ -41,6 +41,6 @@ jobs:
         run: composer box compile
 
       - name: Upload phar to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: build/bin/svgtinyps.phar

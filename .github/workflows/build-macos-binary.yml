@@ -42,7 +42,7 @@ jobs:
 #        uses: actions/cache@v3
 #        with:
 #          path: build/
-#          key: build-deps-php-${{ env.COMPILE_PHP_VERSION }}-${{ runner.os }}
+#          key: build-deps-php${{ env.COMPILE_PHP_VERSION }}-${{ runner.os }}-${{ runner.arch }}
 
       - name: Get composer cache directory
         id: composer-cache
@@ -63,13 +63,13 @@ jobs:
 
       - if: ${{ github.event_name == 'workflow_dispatch' }}
         name: Upload binaries
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.BINARY_NAME }}
           path: build/bin/${{ env.BINARY_NAME }}
 
       - if: ${{ github.event_name != 'workflow_dispatch' }}
         name: Upload binaries to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: build/bin/${{ env.BINARY_NAME }}
