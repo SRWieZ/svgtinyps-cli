@@ -74,7 +74,7 @@ jobs:
 
       - name: PHP Micro combine
         working-directory: build/static-php-cli/
-        run: ./bin/spc micro:combine "../bin/svgtinyps.phar" --output="bin/${{ env.BINARY_NAME }}"
+        run: ./bin/spc micro:combine "../bin/svgtinyps.phar" --output="../bin/${{ env.BINARY_NAME }}"
 
       - if: ${{ github.event_name == 'workflow_dispatch' }}
         name: Upload binaries
