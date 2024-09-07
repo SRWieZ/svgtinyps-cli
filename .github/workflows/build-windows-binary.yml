@@ -51,9 +51,9 @@ jobs:
         working-directory: build
         run: git clone --depth 1 https://github.com/crazywhalecc/static-php-cli.git
 
-      - name: Composer install
+      - name: Composer update
         working-directory: build/static-php-cli/
-        run: composer install --prefer-dist --no-progress --optimize-autoloader
+        run: composer update --no-dev --classmap-authoritative
 
       - name: Check dependencies
         working-directory: build/static-php-cli/
