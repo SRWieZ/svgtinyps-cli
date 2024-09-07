@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Initialize default binary name
 binary_name="svgtinyps"

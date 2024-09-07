@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Initialize default binary name
 binary_name="svgtinyps"
@@ -47,7 +48,7 @@ cd ../
 ./static-php-cli/bin/spc doctor
 ./static-php-cli/bin/spc download --with-php="8.3" --for-extensions="dom,phar,zlib" --prefer-pre-built
 ./static-php-cli/bin/spc switch-php-version "8.3"
-./static-php-cli/bin/spc build --build-micro "dom,phar,zlib"
+./static-php-cli/bin/spc build --build-micro "dom,phar,zlib" --debug
 
 # Build binary
 ./static-php-cli/bin/spc micro:combine bin/svgtinyps.phar --output="bin/$binary_name"
