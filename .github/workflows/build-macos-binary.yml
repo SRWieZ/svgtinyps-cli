@@ -26,7 +26,7 @@ jobs:
           fetch-tags: true
 
       - name: Install macOS missing packages and mark os suffix
-      - run: |
+        run: |
           brew install automake gzip
           echo "SPC_BUILD_OS=macos" >> $GITHUB_ENV
 
