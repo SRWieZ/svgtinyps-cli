@@ -49,7 +49,7 @@ jobs:
 
       - name: Checkout static-php-cli
         working-directory: build
-        run: clone --depth 1 https://github.com/crazywhalecc/static-php-cli.git
+        run: git clone --depth 1 https://github.com/crazywhalecc/static-php-cli.git
 
       - name: Composer install
         working-directory: build/static-php-cli/
