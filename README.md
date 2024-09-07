@@ -96,7 +96,7 @@ Then you can build the binary that you can retrieve in `build/bin/`
 ## Roadmap
 Pull requests are welcome! Here are some ideas to get you started:
 - Use Symfony Console for better ui
-- Build binaries for MacOS arm64 and Windows
+- Build binaries for Windows
 - Publish on Homebrew 
 
 ## Credits
