@@ -57,24 +57,24 @@ jobs:
         run: composer update --no-dev --classmap-authoritative
 
       - name: SPC doctor
-        working-directory: build/static-php-cli/
-        run: ./bin/spc doctor
+        working-directory: build/
+        run: ./static-php-cli/bin/spc doctor
 
       - name: SPC Download
-        working-directory: build/static-php-cli/
-        run: ./bin/spc download --with-php="${{ env.COMPILE_PHP_VERSION }}" --for-extensions="dom,phar,zlib" --prefer-pre-built
+        working-directory: build/
+        run: ./static-php-cli/bin/spc download --with-php="${{ env.COMPILE_PHP_VERSION }}" --for-extensions="dom,phar,zlib" --prefer-pre-built
 
       - name: SPC Switch PHP version
-        working-directory: build/static-php-cli/
-        run: ./bin/spc switch-php-version "${{ env.COMPILE_PHP_VERSION }}"
+        working-directory: build/
+        run: ./static-php-cli/bin/spc switch-php-version "${{ env.COMPILE_PHP_VERSION }}"
 
       - name: SPC Build
-        working-directory: build/static-php-cli/
-        run: ./bin/spc build --build-micro "dom,phar,zlib"
+        working-directory: build/
+        run: ./static-php-cli/bin/spc build --build-micro "dom,phar,zlib"
 
       - name: PHP Micro combine
-        working-directory: build/static-php-cli/
-        run: ./bin/spc micro:combine "bin/svgtinyps.phar" --output="bin/${{ env.BINARY_NAME }}"
+        working-directory: build/
+        run: ./static-php-cli/bin/spc micro:combine bin/svgtinyps.phar --output="bin/${{ env.BINARY_NAME }}"
 
       - if: ${{ github.event_name == 'workflow_dispatch' }}
         name: Upload binaries
