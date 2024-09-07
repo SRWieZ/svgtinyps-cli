@@ -10,7 +10,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   BINARY_NAME: 'svgtinyps-macos-x86_64'
   COMPILE_PHP_VERSION: "8.3"
-  COMPILE_EXTENSIONS: 'phar,dom'
+
 
 jobs:
   build-macos-binary:
@@ -39,7 +39,7 @@ jobs:
           ini-values: memory_limit=-1
 
 #      - name: Cache build dependencies
-#        uses: actions/cache@v3
+#        uses: actions/cache@v4
 #        with:
 #          path: build/
 #          key: build-deps-php${{ env.COMPILE_PHP_VERSION }}-${{ runner.os }}-${{ runner.arch }}
@@ -49,7 +49,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
