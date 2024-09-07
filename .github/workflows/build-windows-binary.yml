@@ -45,12 +45,18 @@ jobs:
       - name: Composer install
         run: composer install --prefer-dist --no-progress --optimize-autoloader
 
+      - run: mkdir build
+
+      - name: Checkout static-php-cli
+        working-directory: build
+        run: clone --depth 1 https://github.com/crazywhalecc/static-php-cli.git
+
       - name: Composer install
-        working-directory: static-php-cli/
+        working-directory: build/static-php-cli/
         run: composer install --prefer-dist --no-progress --optimize-autoloader
 
       - name: Check dependencies
-        working-directory: static-php-cli/
+        working-directory: build/static-php-cli/
         run: ./bin/spc doctor
 
 #      - name: Build Binary
