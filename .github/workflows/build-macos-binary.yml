@@ -27,8 +27,9 @@ jobs:
 
       - name: Install macOS missing packages and mark os suffix
         run: |
-          brew install automake gzip libxml2 pkg-config
+          brew install automake gzip libxml2
           echo "SPC_BUILD_OS=macos" >> $GITHUB_ENV
+          export PKG_CONFIG_PATH="/usr/local/opt/libxml2/lib/pkgconfig"
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
