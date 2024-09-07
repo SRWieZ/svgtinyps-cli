@@ -58,20 +58,6 @@ jobs:
       - name: Composer install
         run: composer install --prefer-dist --no-progress --optimize-autoloader
 
-#      - id: cache-download
-#        name: Cached source download
-#        uses: actions/cache@v3
-#        with:
-#          path: downloads
-#          key: php-${{ env.COMPILE_PHP_VERSION }}-dependencies
-#
-#      - if: steps.cache-download.outputs.cache-hit != 'true'
-#        name: Fetch php and extensions sources
-#        run: ./bin/spc download --with-php=${{ env.COMPILE_PHP_VERSION }} --for-extensions=$COMPILE_EXTENSIONS
-#
-#      - name: Build Micro
-#        run: ./bin/spc build $COMPILE_EXTENSIONS --build-micro
-
       - name: Build Binary
         run: ./build.sh --name "${{ env.BINARY_NAME }}"
 
