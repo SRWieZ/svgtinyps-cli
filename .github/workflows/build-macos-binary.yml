@@ -27,23 +27,22 @@ jobs:
 
       - name: Install macOS missing packages and mark os suffix
         run: |
-          brew install automake gzip libxml2
+          brew install automake gzip 
           echo "SPC_BUILD_OS=macos" >> $GITHUB_ENV
-          export PKG_CONFIG_PATH="/usr/local/opt/libxml2/lib/pkgconfig"
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: ${{ env.COMPILE_PHP_VERSION }}
           tools: pecl, composer
-          extensions: curl, openssl, mbstring, tokenizer, xml
+          extensions: curl, openssl, mbstring, tokenizer
           ini-values: memory_limit=-1
 
-      - name: Cache build dependencies
-        uses: actions/cache@v3
-        with:
-          path: build/
-          key: build-deps-php-${{ env.COMPILE_PHP_VERSION }}-${{ runner.os }}
+#      - name: Cache build dependencies
+#        uses: actions/cache@v3
+#        with:
+#          path: build/
+#          key: build-deps-php-${{ env.COMPILE_PHP_VERSION }}-${{ runner.os }}
 
       - name: Get composer cache directory
         id: composer-cache
