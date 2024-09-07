@@ -13,7 +13,7 @@ env:
 
 
 jobs:
-  build-macos-binary:
+  build-macos-arm-binary:
     runs-on: macos-14
     permissions:
       contents: write
