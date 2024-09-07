@@ -27,8 +27,10 @@ composer global install srwiez/svgtinyps-cli
 
 By [downloading binaries](https://github.com/SRWieZ/svgtinyps-cli/releases/latest) on the latest release, currently only these binaries are compiled on the CI:
 - macOS x86_64
+- macOS arm64
 - linux x86_64
-- linux arm
+- linux arm64
+- windows x64
 
 [//]: # (Coming soon to [Homebrew]&#40;https://brew.sh/&#41;)
 
@@ -96,7 +98,6 @@ Then you can build the binary that you can retrieve in `build/bin/`
 ## Roadmap
 Pull requests are welcome! Here are some ideas to get you started:
 - Use Symfony Console for better ui
-- Build binaries for Windows
 - Publish on Homebrew 
 
 ## Credits
