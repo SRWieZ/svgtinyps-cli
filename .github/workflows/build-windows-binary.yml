@@ -45,7 +45,11 @@ jobs:
       - name: Composer install
         run: composer install --prefer-dist --no-progress --optimize-autoloader
 
-      - run: mkdir build
+      - name: Create .phar
+        run: composer box compile
+
+      - name: Create build/ directory
+        run: mkdir build
 
       - name: Checkout static-php-cli
         working-directory: build
@@ -73,10 +77,7 @@ jobs:
 
       - name: PHP Micro combine
         working-directory: build/static-php-cli/
-        run: ./bin/spc micro:combine bin/svgtinyps.phar --output="bin/${{ env.BINARY_NAME }}"
-
-      - name: Build Binary
-        run: ./build.sh --name "${{ env.BINARY_NAME }}"
+        run: ./bin/spc micro:combine "bin/svgtinyps.phar" --output="bin/${{ env.BINARY_NAME }}"
 
       - if: ${{ github.event_name == 'workflow_dispatch' }}
         name: Upload binaries
