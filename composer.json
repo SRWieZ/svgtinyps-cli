@@ -1,6 +1,7 @@
 {
   "name": "srwiez/svgtinyps-cli",
   "description": "SVG (Portable and Secure) commandline converter for BIMI compliance",
+  "type": "project",
   "license": "MIT",
   "authors": [
     {
