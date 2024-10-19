@@ -5,7 +5,7 @@ error_reporting(0);
 use Composer\InstalledVersions;
 use SVGTinyPS\SVGTinyPS;
 
-if (!class_exists('\Composer\InstalledVersions')) {
+if (! class_exists('\Composer\InstalledVersions')) {
     require __DIR__.'/../vendor/autoload.php';
 }
 
@@ -57,11 +57,11 @@ function showHelp(): void
     echo 'Commands:'.PHP_EOL;
     echo '  convert [input] [output]  - Convert SVG file'.PHP_EOL;
     echo '  issues  [input]           - Check for issues in SVG file'.PHP_EOL;
-    // echo '  minify  [input]           - Minify SVG file'.PHP_EOL;
+    echo '  minify  [input] [output]  - Minify SVG file'.PHP_EOL;
     echo '  help                      - Show this help information'.PHP_EOL;
     echo PHP_EOL;
     echo 'Informations:'.PHP_EOL;
-    echo !str_starts_with($version, '@git_tag') ? '  Version: '.$version.PHP_EOL : '';
+    echo ! str_starts_with($version, '@git_tag') ? '  Version: '.$version.PHP_EOL : '';
     echo '  PHP version: '.phpversion().PHP_EOL;
     // echo 'PHP sapi name: '.php_sapi_name().PHP_EOL;
     echo '  Based on https://github.com/srwiez/php-svg-ps-converter ('.getComposerVersion('srwiez/php-svg-ps-converter').')'.PHP_EOL;
@@ -69,14 +69,14 @@ function showHelp(): void
     echo php_sapi_name() == 'micro' ? '  Compiled with https://github.com/crazywhalecc/static-php-cli'.PHP_EOL : '';
 }
 
-if (!$command || $command === 'help') {
+if (! $command || $command === 'help') {
     showHelp();
     exit;
 }
 
 function checkInputFile($inputFile): void
 {
-    if (!$inputFile || !file_exists($inputFile)) {
+    if (! $inputFile || ! file_exists($inputFile)) {
         echo "Error: Input file not provided or doesn't exist.".PHP_EOL;
         exit(1);
     }
@@ -90,7 +90,7 @@ function checkOutputFile($outputFile): void
         exit(1);
     }
 
-    if ($outputDir && (!is_dir($outputDir) || !is_writable($outputDir))) {
+    if ($outputDir && (! is_dir($outputDir) || ! is_writable($outputDir))) {
         echo "Error: The output directory either does not exist or is not writeable.\n";
         exit(1);
     }
@@ -117,10 +117,17 @@ switch ($command) {
         verboseLog('Checking for SVG issues', $options['is_verbose']);
         checkIssues($inputFile, $options['is_verbose']);
         break;
-        // case 'minify':
-        //     verboseLog('Starting SVG minification', $isVerbose);
-        //     minifySvg($inputFile, $isVerbose);
-        //     break;
+    case 'minify':
+        $inputFile = $argv[1] ?? null;
+        $outputFile = $argv[2] ?? null;
+
+        checkInputFile($inputFile);
+        checkOutputFile($outputFile);
+
+        verboseLog('Starting SVG minification', $options['is_verbose']);
+
+        minifySvg($inputFile, $outputFile, $options['is_verbose']);
+        break;
     default:
         echo 'Invalid command!'.PHP_EOL;
         echo PHP_EOL;
@@ -162,8 +169,15 @@ function checkIssues($input, $isVerbose): void
     }
 }
 
-// function minifySvg($input, $isVerbose)
-// {
-//     verboseLog("Minifying $input", $isVerbose);
-//     // Your implementation
-// }
+function minifySVG($input, $output, $isVerbose): void
+{
+    verboseLog("Converting $input to $output", $isVerbose);
+
+    $new_svg = file_get_contents($input);
+    $new_svg = preg_replace('/\s+/', ' ', $new_svg);
+
+    //TODO: Maybe just use svggo ?
+
+    file_put_contents($output, $new_svg);
+}
+

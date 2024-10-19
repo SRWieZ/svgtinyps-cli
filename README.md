@@ -51,7 +51,7 @@ Identify issues in an SVG file
 svgtinyps issues input.svg
 ```
 
-Convert an SVG file to SVG (P/S)
+Convert an SVG file to SVG P/S (Portabler and Secure) format
 ```bash
 svgtinyps convert input.svg output.svg
 ```
@@ -59,6 +59,11 @@ svgtinyps convert input.svg output.svg
 If in the identified issues, you missing th title tag, you can set its value with the `--title` option
 ```bash
 svgtinyps convert input.svg output.svg --title="My awesome company"
+```
+
+Minify an SVG
+```bash
+svgtinyps minify input.svg output.svg
 ```
 
 
