@@ -16,7 +16,7 @@ and [the RFC](https://datatracker.ietf.org/doc/id/draft-svg-tiny-ps-abrotman-00.
 
 You can also checkout the [PHP package](https://github.com/SRWieZ/php-svg-ps-converter) that this project is based on.
 
-## Installation
+## 🚀 Installation
 
 [//]: # (Download the latest release from [Github releases]&#40;https://github.com/SRWieZ/svgtinyps-cli/releases&#41;)
 
@@ -44,7 +44,7 @@ By [downloading binaries](https://github.com/SRWieZ/svgtinyps-cli/releases/lates
 
 [//]: # (```)
 
-## Usage
+## 📚 Usage
 
 Identify issues in an SVG file
 ```bash
@@ -62,20 +62,20 @@ svgtinyps convert input.svg output.svg --title="My awesome company"
 ```
 
 
-## Testing
+## 🚦 Testing
 This project use [Pest](https://pestphp.com/) for testing.
 ```bash
 composer test
 ```
 
-## Contribute
+## 👥 Contribute
 This project follows PSR coding style. You can use `composer pint` to apply.
 
 All tests are executed with pest. Use `composer pest`
 
 It's recommended to execute `composer qa` before commiting (alias for executing Pint and Pest)
 
-## Build from sources
+## 🔧 Build from sources
 This project use [box](https://github.com/box-project/box), [php-static-cli](https://github.com/crazywhalecc/static-php-cli) and [php-micro](https://github.com/dixyes/phpmicro).
 A build script has been created to build the project. (tested only on macOS x86_64)
 
@@ -95,12 +95,12 @@ Then you can build the binary that you can retrieve in `build/bin/`
 [//]: # (act -j build-linux-arm-binary)
 
 [//]: # (```)
-## Roadmap
+## 📋 Roadmap
 Pull requests are welcome! Here are some ideas to get you started:
 - Use Symfony Console for better ui
 - Publish on Homebrew 
 
-## Credits
+## 👥 Credits
 
 **svgtinyps** was created by Eser DENIZ.
 
@@ -109,6 +109,6 @@ of [authindicators/svg-ps-converters](https://github.com/authindicators/svg-ps-c
 
 Thanks to [gilbarbara/logos](https://github.com/gilbarbara/logos) for the logos used in the tests.
 
-## License
+## 📝 License
 
 **svgtinyps** PHP is licensed under the MIT License. See LICENSE for more information.
