@@ -1,9 +1,8 @@
 # svgtinyps
 
-![GitHub release (with filter)](https://img.shields.io/github/v/release/SRWieZ/svgtinyps-cli)
-![Packagist PHP Version](https://img.shields.io/packagist/dependency-v/SRWieZ/svgtinyps-cli/php)
-![Packagist License (custom server)](https://img.shields.io/packagist/l/SRWieZ/svgtinyps-cli)
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/SRWieZ/svgtinyps-cli/test.yml)
+![GitHub release (with filter)](https://badgen.net/github/release/SRWieZ/svgtinyps-cli)
+![Packagist PHP Version](https://badgen.net/packagist/php/SRWieZ/svgtinyps-cli)
+![Packagist License (custom server)](https://badgen.net/packagist/license/SRWieZ/svgtinyps-cli)
 
 
 CLI Tool for SVG Tiny P/S (Portable and Secure) conversion and BIMI compliance.
