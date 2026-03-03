@@ -1,7 +1,7 @@
 <?php
 
-test('it returns issues', function ($svg, $issues_excepted) {
-    $input_file = fixPathForTest('assets/'.$svg);
+test('it returns issues', function ($logo, $issues_excepted) {
+    $input_file = fixPathForTest('assets/'.$logo);
 
     exec('php src/svgtinyps.php issues '.$input_file, $output, $exit_code);
     $issues = array_filter(array_map('trim', $output));

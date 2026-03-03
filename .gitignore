@@ -16,4 +16,5 @@
 /build
 .phpunit.result.cache
 .DS_Store
-
+.claude/settings.local.json
+upkeep.yml
