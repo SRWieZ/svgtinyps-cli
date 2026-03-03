@@ -5,7 +5,7 @@ error_reporting(0);
 use Composer\InstalledVersions;
 use SVGTinyPS\SVGTinyPS;
 
-if (!class_exists('\Composer\InstalledVersions')) {
+if (! class_exists('\Composer\InstalledVersions')) {
     require __DIR__.'/../vendor/autoload.php';
 }
 
@@ -61,7 +61,7 @@ function showHelp(): void
     echo '  help                      - Show this help information'.PHP_EOL;
     echo PHP_EOL;
     echo 'Informations:'.PHP_EOL;
-    echo !str_starts_with($version, '@git_tag') ? '  Version: '.$version.PHP_EOL : '';
+    echo ! str_starts_with($version, '@git_tag') ? '  Version: '.$version.PHP_EOL : '';
     echo '  PHP version: '.phpversion().PHP_EOL;
     // echo 'PHP sapi name: '.php_sapi_name().PHP_EOL;
     echo '  Based on https://github.com/srwiez/php-svg-ps-converter ('.getComposerVersion('srwiez/php-svg-ps-converter').')'.PHP_EOL;
@@ -69,14 +69,14 @@ function showHelp(): void
     echo php_sapi_name() == 'micro' ? '  Compiled with https://github.com/crazywhalecc/static-php-cli'.PHP_EOL : '';
 }
 
-if (!$command || $command === 'help') {
+if (! $command || $command === 'help') {
     showHelp();
     exit;
 }
 
 function checkInputFile($inputFile): void
 {
-    if (!$inputFile || !file_exists($inputFile)) {
+    if (! $inputFile || ! file_exists($inputFile)) {
         echo "Error: Input file not provided or doesn't exist.".PHP_EOL;
         exit(1);
     }
@@ -90,7 +90,7 @@ function checkOutputFile($outputFile): void
         exit(1);
     }
 
-    if ($outputDir && (!is_dir($outputDir) || !is_writable($outputDir))) {
+    if ($outputDir && (! is_dir($outputDir) || ! is_writable($outputDir))) {
         echo "Error: The output directory either does not exist or is not writeable.\n";
         exit(1);
     }
